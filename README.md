@@ -1,4 +1,6 @@
 # icecombo
+This project is for the national Ice Cream month.  
+Have fun making crazy combos of your ice cream !
 
 ## Project setup
 ```
@@ -14,6 +16,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
