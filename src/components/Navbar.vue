@@ -17,25 +17,44 @@
     <div class="col-lg-11">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Create Combo</a>
+          <a v-if="user" class="nav-link" href="#">Create Combo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">My Combos</a>
+          <a v-if="user" class="nav-link" href="#">My Combos</a>
         </li>
         <li class="nav-item">
           <router-link to='/about' class="nav-link" href="#">About</router-link>
         </li>
       </ul>
     </div>
-     <div class="col-lg-1">
-          <button type="button" class="btn btn-outline-light">Logout</button>
+     <div v-if="user" class="col-lg-1">
+          <button @click="handleClick" type="button" class="btn btn-outline-light">Logout</button>
       </div>
   </div>
 </nav>
 </template>
 
 <script>
-export default {}
+import useLogout from '@/composables/useLogout'
+import getUser from '@/composables/getUser'
+import { useRouter } from 'vue-router'
+
+  export default {
+    setup() {
+      const { user } = getUser()
+      const { logout } = useLogout()
+      
+      const router = useRouter()
+      
+      const handleClick = async () => {
+        await logout()
+        console.log('user logged out')
+        router.push({ name: 'Login' })
+      }
+      
+      return { handleClick, user }
+    }
+  }
 </script>
 
 <style>
