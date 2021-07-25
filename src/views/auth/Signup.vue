@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <h6 class="display-4 text-center">Let's make ice cream !</h6>
+                <h6 class="display-4 text-center text-light">Let's make ice cream !</h6>
                 <img class="img-fluid" src="@/assets/ice-cream.png" alt="ice cream">
             </div>
 </template>
