@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
+import CreateCombo from '../views/combos/CreateCombo.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/create',
+    name: 'Create',
+    component: CreateCombo
   }
 ]
 
