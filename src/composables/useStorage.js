@@ -23,7 +23,7 @@ const useStorage = () => {
     }
 
     const uploadAvatar = async (file) => {
-        filePath.value = `Avatar/${user.value.uid}/${file.name}`
+        filePath.value = `avatars/${user.value.uid}/${file.name}`
         const storageRef = projectStorage.ref(filePath.value)
 
         try {
