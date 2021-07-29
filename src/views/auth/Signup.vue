@@ -50,6 +50,7 @@ export default {
         const displayName = ref('')
         const file = ref(null)
         const fileError = ref(null)
+        const avatarUrl = ref(url.value)
 
         const router = useRouter()
 
@@ -79,7 +80,7 @@ export default {
                 fileError.value = 'Please select an image file (png or jpg)'
             }
         }
-        return { email, password, displayName, isPending, error, handleSubmit, handleChange }
+        return { email, password, displayName, avatarUrl , isPending, error, handleSubmit, handleChange }
     }
 }
 </script>

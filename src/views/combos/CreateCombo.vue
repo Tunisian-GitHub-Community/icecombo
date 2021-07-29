@@ -10,9 +10,6 @@
                         <input type="text" required class="form-control" placeholder="Title" v-model="title">
                     </div>
                     <div class="form-group">
-                        <input required class="form-control" placeholder="Ingredients" rows="3" v-model="ingredients">
-                    </div>
-                    <div class="form-group">
                         <textarea class="form-control" placeholder="Description (optional)" rows="3" v-model="description"></textarea>
                     </div>
                     <div class="form-group">
@@ -33,39 +30,62 @@
 <script>
 import {ref} from 'vue'
 import useStorage from '@/composables/useStorage'
+import useCollection from '@/composables/useCollection'
+import getUser from '@/composables/getUser'
+import { timestamp } from '@/firebase/config'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
         const { filePath, url, uploadImage } = useStorage()
+        const { error, addDoc } = useCollection('combos')
+        const { user } = getUser()
 
         const title = ref('')
         const description = ref('')
         const file = ref(null)
         const fileError = ref(null)
-
+        
+        const isPending = ref(false)
+        const router = useRouter()
+        
         const handleSubmit = async () => {
             if (file.value) {
+                isPending.value = true
                 await uploadImage(file.value)
+                const res = await addDoc({
+                    title: title.value,
+                    description: description.value,
+                    userId: user.value.uid,
+                    userName: user.value.displayName,
+                    coverUrl: url.value,
+                    filePath: filePath.value,
+                    ingredients: [],
+                    createdAt: timestamp() 
+                })
+                isPending.value = false
+            if (!error.value) {
+                console.log("combo added")
+            }
             }
         }
-
+        
         // allowed file types
         const types = ['image/png', 'image/jpeg']
 
         const handleChange = (e) => {
             const selected = e.target.files[0]
             console.log(selected)
-
             if (selected && types.includes(selected.type)) {
                 file.value = selected
                 fileError.value = null
             } else {
                 file.value = null
                 fileError.value = 'Please select an image file (png or jpg)'
-            }
+                }
         }
 
-        return { title, description, handleSubmit, handleChange, fileError }
+        return { title, description, handleSubmit, handleChange, fileError, isPending }
     }
 }
 </script>
