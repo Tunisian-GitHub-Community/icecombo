@@ -14,10 +14,10 @@
 
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <div class="col-lg-11">
+    <div class="col-lg-9">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a v-if="user" class="nav-link" href="#">Create Combo</a>
+          <router-link to="/create" v-if="user" class="nav-link" href="#">Create Combo</router-link >
         </li>
         <li class="nav-item">
           <a v-if="user" class="nav-link" href="#">My Combos</a>
@@ -27,8 +27,11 @@
         </li>
       </ul>
     </div>
-     <div v-if="user" class="col-lg-1">
+     <div v-if="user" class="col-lg-3">
+       <div class="row">
+          <p style="padding-right: 20px" class="text-light">Logged in as <b>{{ user.displayName}}</b></p>
           <button @click="handleClick" type="button" class="btn btn-outline-light">Logout</button>
+       </div>
       </div>
   </div>
 </nav>

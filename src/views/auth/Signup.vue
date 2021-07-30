@@ -17,11 +17,11 @@
                                 <input type="password" class="form-control" placeholder="Password" v-model="password">
                             </div>
                             <div v-if="error" class="text-danger">{{ error }}</div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Upload your account image</label>
                                 <input type="file" class="form-control-file" @change="handleChange">
                                 <div class="text-danger">{{ fileError }}</div>
-                            </div>
+                            </div> -->
                             <button v-if="!isPending" style="margin: 25px;" class="btn btn-primary">Sign up</button>
                             <button v-if="isPending" disabled style="margin: 25px;" class="btn btn-primary">Loading...</button>
                         </form>
@@ -50,7 +50,6 @@ export default {
         const displayName = ref('')
         const file = ref(null)
         const fileError = ref(null)
-        const avatarUrl = ref(url.value)
 
         const router = useRouter()
 
@@ -58,6 +57,7 @@ export default {
             const res = await signup(email.value, password.value, displayName.value)
             if (file.value) {
                 await uploadAvatar(file.value)
+                // await res.user.updateProfile( url )
             }
             router.push({ name: 'Home' })
             if (!error.value) {
@@ -80,7 +80,7 @@ export default {
                 fileError.value = 'Please select an image file (png or jpg)'
             }
         }
-        return { email, password, displayName, avatarUrl , isPending, error, handleSubmit, handleChange }
+        return { email, password, displayName, isPending, error, handleSubmit, handleChange }
     }
 }
 </script>
