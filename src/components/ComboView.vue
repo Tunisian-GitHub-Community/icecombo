@@ -40,7 +40,7 @@ export default {
   }
   .thumbnail {
     max-width: 200px;
-    max-height: 200px;
+    max-height: 100px;
     overflow: hidden;
     border-radius: 5px;
   }
