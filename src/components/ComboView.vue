@@ -3,6 +3,7 @@
         <br>
             <div class="card">
             <div class="card-body">
+                <router-link class="nav-link" :to="{ name: 'ComboDetails', params: { id:combo.id } }">
                 <div class="single">
                     <div class="thumbnail">
                         <img :src="combo.coverUrl">
@@ -13,6 +14,7 @@
                         <p style="color: black">Created by {{combo.userName}}</p>
                     </div>
                 </div>
+                </router-link>
             </div>
           </div>
     </div>

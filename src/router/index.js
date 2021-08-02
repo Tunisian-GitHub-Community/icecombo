@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
 import CreateCombo from '../views/combos/CreateCombo.vue'
+import ComboDetails from '../views/combos/ComboDetails.vue'
 
 // route guard
 import { projectAuth } from '../firebase/config'
@@ -44,6 +45,13 @@ const routes = [
     name: 'Create',
     component: CreateCombo,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/combos/:id',
+    name: 'ComboDetails',
+    component: ComboDetails,
+    beforeEnter: requireAuth,
+    props: true
   }
 ]
 
