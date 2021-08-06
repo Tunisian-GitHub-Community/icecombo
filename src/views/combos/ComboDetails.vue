@@ -19,25 +19,32 @@
 </template>
 
 <script>
+import useStorage from '@/composables/useStorage'
+import useDocument from '@/composables/useDocument'
 import getDocument from '@/composables/getDocument'
 import getUser from '@/composables/getUser'
 import { computed } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
 
 export default {
-props: ['id'],
-setup(props) {
+  props: ['id'],
+  setup(props) {
     const { error, document: combo } = getDocument('combos', props.id)
     const { user } = getUser()
-
+    const { deleteDoc, updateDoc } = useDocument('combos', props.id)
+    const { deleteImage } = useStorage()
+    const router = useRouter()
+    
     const ownership = computed(() => {
       return combo.value && user.value && user.value.uid == combo.value.userId
     })
+    const handleDelete = async () => {
+      await deleteImage(combo.value.filePath)
+      await deleteDoc()
+      router.push({ name: 'Home' }) 
+    }
 
-    return { error, combo, ownership }
+    return { error, combo, ownership, handleDelete }
 }
 }
 </script>
-
-<style>
-
-</style>
