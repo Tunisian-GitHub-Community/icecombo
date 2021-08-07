@@ -14,11 +14,25 @@
     </div>
   </div>
 <div v-if="combo" class="col-lg-9">
+    <!-- Combo ingredients -->
+    <h5 v-if="!combo.ingredients.length" class="text-muted">No ingredients have been added to this combo yet.</h5>
+    <h4 v-else class="text-light display-4">Ingredients:</h4>
+    <div v-for="ingredient in combo.ingredients" :key="ingredient.id">
+      <div class="card">
+        <div class="card-body">
+            <h4>{{ ingredient.ing }}</h4>
+          <button v-if="ownership" @click="handleClick(item.id)" class="btn btn-outline-dark float-right">Delete</button>
+        </div>
+      </div>
+      <br>
+    </div>
+    <AddIng v-if="ownership" :combo="combo" />
     <div v-if="error" class="text-danger">{{ error }}</div>
 </div>
 </template>
 
 <script>
+import AddIng from '@/components/AddIng.vue'
 import useStorage from '@/composables/useStorage'
 import useDocument from '@/composables/useDocument'
 import getDocument from '@/composables/getDocument'
@@ -28,6 +42,7 @@ import { useRouter } from 'vue-router'
 
 export default {
   props: ['id'],
+  components: { AddIng },
   setup(props) {
     const { error, document: combo } = getDocument('combos', props.id)
     const { user } = getUser()
@@ -43,8 +58,12 @@ export default {
       await deleteDoc()
       router.push({ name: 'Home' }) 
     }
+    const handleClick = async (id) => {
+        const ingredients = combo.value.ingrdients.filter((ingredient) => ingredient.id != id)
+        await updateDoc({ ingredients }) 
+      }
 
-    return { error, combo, ownership, handleDelete }
+    return { error, combo, ownership, handleDelete, handleClick }
 }
 }
 </script>
