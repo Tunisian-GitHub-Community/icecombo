@@ -21,7 +21,7 @@
       <div class="card">
         <div class="card-body">
             <h4>{{ ingredient.ing }}</h4>
-          <button v-if="ownership" @click="handleClick(item.id)" class="btn btn-outline-dark float-right">Delete</button>
+          <button v-if="ownership" @click="handleClick(ingredient.id)" class="btn btn-outline-dark float-right">Delete</button>
         </div>
       </div>
       <br>
@@ -59,7 +59,7 @@ export default {
       router.push({ name: 'Home' }) 
     }
     const handleClick = async (id) => {
-        const ingredients = combo.value.ingrdients.filter((ingredient) => ingredient.id != id)
+        const ingredients = combo.value.ingredients.filter((ingredient) => ingredient.id != id)
         await updateDoc({ ingredients }) 
       }
 
