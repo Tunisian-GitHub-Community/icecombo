@@ -17,13 +17,13 @@
     <div class="col-lg-9">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <router-link to="/create" v-if="user" class="nav-link" href="#">Create Combo</router-link >
+          <router-link to="/create" v-if="user" class="nav-link">Create Combo</router-link >
         </li>
         <li class="nav-item">
-          <a v-if="user" class="nav-link" href="#">My Combos</a>
+          <router-link to="/combos/user" v-if="user" class="nav-link">My Combos</router-link >
         </li>
         <li class="nav-item">
-          <router-link to='/about' class="nav-link" href="#">About</router-link>
+          <router-link to='/about' class="nav-link">About</router-link>
         </li>
       </ul>
     </div>

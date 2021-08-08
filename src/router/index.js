@@ -5,6 +5,7 @@ import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
 import CreateCombo from '../views/combos/CreateCombo.vue'
 import ComboDetails from '../views/combos/ComboDetails.vue'
+import UserCombos from '../views/combos/UserCombos.vue'
 
 // route guard
 import { projectAuth } from '../firebase/config'
@@ -52,6 +53,12 @@ const routes = [
     component: ComboDetails,
     beforeEnter: requireAuth,
     props: true
+  },
+  {
+    path: '/combos/user',
+    name: 'UserCombos',
+    component: UserCombos,
+    beforeEnter: requireAuth
   }
 ]
 

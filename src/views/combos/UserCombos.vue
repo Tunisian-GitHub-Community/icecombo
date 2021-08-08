@@ -1,5 +1,7 @@
 <template>
-   <div v-for="combo in combos" :key="combo.id">
+  <div v-if="combos">
+    <h5 class="display-4 text-light">My combos</h5>
+    <div v-for="combo in combos" :key="combo.id">
         <br>
             <div class="card">
             <div class="card-body">
@@ -11,22 +13,33 @@
                     <div class="info">
                         <h3 style="color: black">{{combo.title}}</h3>
                         <p style="color: black">{{combo.description}}</p>
-                        <p style="color: black">Created by <b>{{combo.userName}}</b></p>
                     </div>
                 </div>
                 </router-link>
             </div>
           </div>
     </div>
+    <br>
+    <router-link to="/create"><button type="button" class="btn btn-outline-light">Create combo</button></router-link>
+  </div>
+  <div v-else>
+    <h5 class="display-4 text-muted">You didn't create any combo for now</h5>
+    <router-link to="/create"><button type="button" class="btn btn-outline-light">Create combo</button></router-link>
+  </div>
 </template>
 
 <script>
+import getUser from '@/composables/getUser'
+import getCollection from '@/composables/getCollection'
 export default {
-    props: ['combos']
-
+  setup() {
+    const { user } = getUser()
+    const { documents: combos } = getCollection('combos', ['userId', '==', user.value.uid])
+    console.log(combos)
+    return { combos }
+  }
 }
 </script>
-
 <style scoped>
 .single {
     display: flex;
