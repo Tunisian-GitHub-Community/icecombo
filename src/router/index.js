@@ -6,6 +6,7 @@ import Signup from '../views/auth/Signup.vue'
 import CreateCombo from '../views/combos/CreateCombo.vue'
 import ComboDetails from '../views/combos/ComboDetails.vue'
 import UserCombos from '../views/combos/UserCombos.vue'
+import NotFound from '../views/NotFound.vue'
 
 // route guard
 import { projectAuth } from '../firebase/config'
@@ -59,6 +60,11 @@ const routes = [
     name: 'UserCombos',
     component: UserCombos,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
