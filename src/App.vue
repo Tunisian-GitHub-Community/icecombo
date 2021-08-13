@@ -26,4 +26,17 @@ body {
  background-image: url("./assets/pink-melting-ice-cream-abstract-qhd-wallpaper-2560x2560.jpg");
  background-size: 1706px;
 }
+div {
+    animation: transitionIn 0.75s;
+}
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
 </style>
